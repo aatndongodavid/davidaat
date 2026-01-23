@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David Meilleur - Data Scientist & AI Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-bg: #0A0E27;
+      --secondary-bg: #1A1F3A;
+      --accent-color: #00D4FF;
+      --gold: #FFD700;
+      --success: #00FF88;
+      --text-primary: #FFFFFF;
+      --text-secondary: #B8B8B8;
+      --gradient-accent: linear-gradient(135deg, #00D4FF 0%, #0099CC 100%);
+      --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      --shadow-soft: 0 8px 32px rgba(0, 212, 255, 0.1);
+      --shadow-strong: 0 20px 60px rgba(0, 212, 255, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--primary-bg);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+      animation: bgFloat 20s ease-in-out infinite;
+    }
+
+    @keyframes bgFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--accent-color);
+      border-radius: 50%;
+      animation: particleFloat 15s infinite linear;
+    }
+
+    .particle:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      left: 25%;
+      animation-delay: 3s;
+    }
+
+    .particle:nth-child(3) {
+      left: 40%;
+      animation-delay: 6s;
+    }
+
+    .particle:nth-child(4) {
+      left: 55%;
+      animation-delay: 9s;
+    }
+
+    .particle:nth-child(5) {
+      left: 70%;
+      animation-delay: 12s;
+    }
+
+    .particle:nth-child(6) {
+      left: 85%;
+      animation-delay: 15s;
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-10vh) scale(0);
+        opacity: 0;
+      }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 14, 39, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-color);
+      background: rgba(0, 212, 255, 0.1);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 2rem 4rem;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 1400px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-image-wrapper {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 3px solid var(--accent-color);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .profile-image-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .gradient-text {
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-text h2 {
+      font-size: 1.8rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .hero-tagline {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-style: italic;
+      padding-left: 1rem;
+      border-left: 3px solid var(--gold);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: white;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 2px solid var(--accent-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 212, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .section {
+      padding: 6rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--gradient-accent);
+      border-radius: 2px;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .about-text {
+      background: rgba(26, 31, 58, 0.6);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .about-text h3 {
+      color: var(--accent-color);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .skills-container {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .skill-group {
+      background: rgba(26, 31, 58, 0.6);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .skill-group:hover {
+      border-color: var(--accent-color);
+      transform: translateX(10px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .skill-group h4 {
+      color: var(--gold);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .skill-tag {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .skill-tag:hover {
+      background: var(--accent-color);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .soft-skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .soft-skill-item {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid var(--gold);
+      padding: 1rem;
+      border-radius: 15px;
+      text-align: center;
+      color: var(--gold);
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .soft-skill-item:hover {
+      background: var(--gold);
+      color: var(--primary-bg);
+      transform: translateY(-5px);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: rgba(26, 31, 58, 0.6);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .project-image {
+      height: 200px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(255, 215, 0, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .project-card:hover .project-image::before {
+      left: 100%;
+    }
+
+    .project-content {
+      padding: 2rem;
+    }
+
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .project-tag {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.85rem;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .project-link {
+      padding: 0.5rem 1rem;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-link:hover {
+      background: var(--accent-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .cv-section {
+      background: rgba(26, 31, 58, 0.3);
+      padding: 6rem 2rem;
+    }
+
+    .cv-container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cv-card {
+      background: rgba(26, 31, 58, 0.6);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      padding: 3rem;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .cv-icon {
+      font-size: 5rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .cv-card h3 {
+      font-size: 2rem;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .cv-card p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .download-btn {
+      padding: 1.2rem 3rem;
+      background: var(--gradient-gold);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.5);
+    }
+
+    .contact-section {
+      background: var(--primary-bg);
+      padding: 6rem 2rem;
+    }
+
+    .contact-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-item {
+      background: rgba(26, 31, 58, 0.6);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 15px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-item i {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    .contact-item h3 {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-item a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item a:hover {
+      color: var(--accent-color);
+    }
+
+    footer {
+      background: var(--secondary-bg);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal pour le CV */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 14, 39, 0.95);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal-content {
+      background: var(--secondary-bg);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      border: 2px solid var(--accent-color);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-modal:hover {
+      color: var(--accent-color);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-image-container {
+        order: -1;
+      }
+
+      .profile-image-wrapper {
+        width: 280px;
+        height: 280px;
+      }
+
+      .hero-text h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-text h2 {
+        font-size: 1.4rem;
+      }
+
+      .hero-tagline {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-image-wrapper {
+        width: 250px;
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-animation"></div>
+
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Modal pour le CV -->
+  <div id="cvModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal()">&times;</button>
+      <h2 style="color: var(--accent-color); margin-bottom: 2rem; text-align: center;">Mon CV</h2>
+      <div
+        style="background: var(--primary-bg); padding: 2rem; border-radius: 15px; border: 1px solid rgba(0, 212, 255, 0.2);">
+        <h3 style="color: var(--gold); margin-bottom: 1rem;">AAT NDONGO David Meilleur</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Data Scientist & AI Engineer</p>
+
+        <div style="margin: 2rem 0;">
+          <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Formation</h4>
+          <ul style="color: var(--text-secondary); margin-left: 1rem;">
+            <li>Licence en Science des Données et Intelligence Artificielle (en cours)</li>
+            <li>DUT Génie Électrique et Informatique Industrielle</li>
+          </ul>
+        </div>
+
+        <div style="margin: 2rem 0;">
+          <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Compétences Techniques</h4>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span
+              style="background: rgba(0, 212, 255, 0.1); color: var(--text-primary); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">Python</span>
+            <span
+              style="background: rgba(0, 212, 255, 0.1); color: var(--text-primary); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">Pandas</span>
+            <span
+              style="background: rgba(0, 212, 255, 0.1); color: var(--text-primary); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">NumPy</span>
+            <span
+              style="background: rgba(0, 212, 255, 0.1); color: var(--text-primary); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">Scikit-learn</span>
+            <span
+              style="background: rgba(0, 212, 255, 0.1); color: var(--text-primary); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">SQL</span>
+            <span
+              style="background: rgba(0, 212, 255, 0.1); color: var(--text-primary); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">Power
+              BI</span>
+          </div>
+        </div>
+
+        <div style="margin: 2rem 0;">
+          <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Projets</h4>
+          <ul style="color: var(--text-secondary); margin-left: 1rem;">
+            <li>Tatiana IA - Application desktop avec calculs chimiques et NLP</li>
+            <li>Student Success Predictor - Prédiction de réussite étudiante</li>
+            <li>Système de Facturation EYOUM'SHOP - Gestion automatique</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <nav>
+      <div class="logo">DM</div>
+      <ul class="nav-links">
+        <li><a href="#home">Accueil</a></li>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#projects">Projets</a></li>
+        <li><a href="#cv" onclick="openModal()">CV</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="hero-image-container">
+        <div class="profile-image-wrapper">
+          <!--  photo -->
+          <img src="images\pp.jpg" alt="David Meilleur" class="profile-image">
+        </div>
+      </div>
+
+      <div class="hero-text">
+        <h1>
+          <span class="gradient-text">AAT NDONGO David Meilleur</span>
+        </h1>
+        <h2>Data Scientist & AI Engineer</h2>
+        <p class="hero-tagline">
+          "Transformer les données en insights, l'intelligence artificielle en solutions concrètes"
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fas fa-rocket"></i> Découvrir mes projets
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fas fa-envelope"></i> Me contacter
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2 class="section-title">À Propos</h2>
+    <div class="about-content">
+      <div class="about-text fade-in">
+        <h3><i class="fas fa-user-graduate"></i> Mon Parcours</h3>
+        <p>
+          Étudiant en Licence en Science des Données et Intelligence Artificielle (Cycle Science de l'Ingénieur à
+          l'Ecole Nationale Superieure Polytechnique de Doula),
+          je suis passionné par l'intersection entre la technologie, les données et la créativité.
+        </p>
+        <p>
+          Avec une formation en Génie Électrique et Informatique Industrielle (DUT & Licence Technologique) et des
+          expériences variées
+          allant du support client à l'infographie, j'ai développé une approche polyvalente de la résolution
+          de problèmes.
+        </p>
+        <p>
+          Ma passion pour la data science m'anime quotidiennement : explorer des datasets complexes,
+          créer des modèles prédictifs, et transformer des chiffres en histoires qui ont du sens.
+          Chaque projet est une opportunité d'apprendre et d'innover.
+        </p>
+      </div>
+
+      <div class="skills-container">
+        <div class="skill-group fade-in">
+          <h4><i class="fas fa-brain"></i> Compétences Techniques - Data Science</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">SciPy</span>
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">Scikit-learn</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Excel</span>
+            <span class="skill-tag">PowerPoint</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">Deep Learning</span>
+          </div>
+        </div>
+
+        <div class="skill-group fade-in">
+          <h4><i class="fas fa-heart"></i> Soft Skills</h4>
+          <div class="soft-skills">
+            <div class="soft-skill-item">Ponctualité</div>
+            <div class="soft-skill-item">Assiduité</div>
+            <div class="soft-skill-item">Respect</div>
+            <div class="soft-skill-item">Productivité</div>
+            <div class="soft-skill-item">Sociabilité</div>
+            <div class="soft-skill-item">Tolérance</div>
+            <div class="soft-skill-item">Créativité</div>
+            <div class="soft-skill-item">Rigueur</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section" style="background: rgba(26, 31, 58, 0.3);">
+    <h2 class="section-title">Mes Projets</h2>
+    <div class="projects-grid">
+      <div class="project-card fade-in">
+        <div class="project-image">
+          🧪
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Tatiana IA</h3>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">NLP</span>
+            <span class="project-tag">Desktop App</span>
+            <span class="project-tag">Chimie</span>
+            <span class="project-tag">Machine Learning</span>
+          </div>
+          <p class="project-description">
+            Application desktop installable intégrant une IA pour effectuer des calculs chimiques simples
+            (quantité de matière, masse moléculaire) avec traitement du langage naturel. Interface intuitive
+            avec reconnaissance de commandes naturelles.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/monsieurMechant200/Tatiana_IA" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> Voir sur GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-image">
+          🎓
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Student Success Predictor</h3>
+          <div class="project-tags">
+            <span class="project-tag">Machine Learning</span>
+            <span class="project-tag">FastAPI</span>
+            <span class="project-tag">Scikit-learn</span>
+            <span class="project-tag">Web App</span>
+            <span class="project-tag">Data Visualization</span>
+          </div>
+          <p class="project-description">
+            Application web prédictive analysant les habitudes académiques des étudiants pour prédire
+            leur probabilité de réussite. Interface interactive avec visualisations des données et
+            dashboard administrateur.
+          </p>
+          <div class="project-links">
+            <a href="https://student-prediction-interface.onrender.com/static/index.html" target="_blank"
+              class="project-link">
+              <i class="fas fa-globe"></i> Voir la démo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-image">
+          💼
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Système de Facturation EYOUM'SHOP</h3>
+          <div class="project-tags">
+            <span class="project-tag">Excel VBA</span>
+            <span class="project-tag">Automatisation</span>
+            <span class="project-tag">Gestion</span>
+            <span class="project-tag">Dashboard</span>
+            <span class="project-tag">Analyse Financière</span>
+          </div>
+          <p class="project-description">
+            Système complet de facturation avec gestion des stocks, suivi des ventes et tableaux de bord
+            financiers. Comprend 3 modules : dashboard général, gestion ventes, gestion stocks.
+            Automatisation complète des processus.
+          </p>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-image">
+          🎯
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Formation Professionnelle Infographie</h3>
+          <div class="project-tags">
+            <span class="project-tag">Business Plan</span>
+            <span class="project-tag">Formation</span>
+            <span class="project-tag">Design</span>
+            <span class="project-tag">Marketing</span>
+            <span class="project-tag">Gestion de Projet</span>
+          </div>
+          <p class="project-description">
+            Conception et mise en place d'un programme de formation professionnelle en infographie
+            (Photoshop, Illustrator, InDesign, CorelDRAW) sur 3 mois avec certification.
+            Développement du curriculum et des supports pédagogiques.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cv" class="cv-section">
+    <div class="cv-container">
+      <div class="cv-card fade-in">
+        <div class="cv-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h3>CV Épuré et Professionnel</h3>
+        <p>
+          Téléchargez mon CV au format PDF pour une consultation hors ligne.
+          Un document structuré présentant mes compétences, mon parcours et mes réalisations.
+        </p>
+        <a href="documents\cv aat ndongo david meilleur.pdf" class="download-btn" download>
+          <i class="fas fa-download"></i> Télécharger mon CV
+        </a>
+        <p style="margin-top: 1.5rem; color: var(--accent-color); font-size: 0.9rem;">
+          <i class="fas fa-eye"></i> Cliquez <a href="#" onclick="openModal()"
+            style="color: var(--gold); text-decoration: underline;">ici</a> pour prévisualiser le CV
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-container">
+      <p style="color: var(--text-secondary); font-size: 1.2rem; max-width: 600px; margin: 0 auto 3rem;">
+        N'hésitez pas à me contacter pour discuter de projets, d'opportunités ou simplement échanger autour de la data
+        science !
+      </p>
+
+      <div class="contact-info">
+        <div class="contact-item fade-in">
+          <i class="fas fa-envelope"></i>
+          <h3>Email</h3>
+          <a href="mailto:meilleurd2001@gmail.com">meilleurd2001@gmail.com</a>
+        </div>
+
+        <div class="contact-item fade-in">
+          <i class="fab fa-linkedin"></i>
+          <h3>LinkedIn</h3>
+          <a href="https://linkedin.com/in/david-meilleur-aat-ndongo" target="_blank">David Aat</a>
+        </div>
+
+        <div class="contact-item fade-in">
+          <i class="fab fa-github"></i>
+          <h3>GitHub</h3>
+          <a href="https://github.com/monsieurMechant200" target="_blank">monsieurMechant200</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 AAT NDONGO David Meilleur. Tous droits réservés.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--accent-color);">
+      <i class="fas fa-code"></i> Conçu avec passion pour la data science
+    </p>
+  </footer>
+
+  <script>
+    // Animation d'apparition au scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const appearOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          appearOnScroll.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(element => {
+      appearOnScroll.observe(element);
+    });
+
+    // Gestion du modal
+    function openModal() {
+      document.getElementById('cvModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('cvModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Fermer le modal en cliquant en dehors
+    window.onclick = function (event) {
+      const modal = document.getElementById('cvModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // Smooth scrolling pour les liens d'ancrage
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Effet de changement d'opacité du header au scroll
+    window.addEventListener('scroll', function () {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(10, 14, 39, 0.98)';
+        header.style.backdropFilter = 'blur(20px)';
+      } else {
+        header.style.background = 'rgba(10, 14, 39, 0.95)';
+      }
+    });
+  </script>
+</body>
+
+</html>
