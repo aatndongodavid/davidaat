@@ -1,5 +1,3 @@
-
-```
 #  Portfolio | David Meilleur - Data Scientist & AI Engineer
 
 <div align="center">
@@ -116,11 +114,10 @@ https://monsieurMechant200.github.io
 - **GitHub** : [@monsieurMechant200](https://github.com/monsieurMechant200)
 - **Portfolio** : [Mon portfolio](https://davidaat.github.io)
 
-## 📄 Licence
+## Licence
 
 Ce projet est sous licence MIT. Vous êtes libre de l'utiliser comme base pour votre propre portfolio.
 
----
 
 <div align="center">
 
@@ -129,7 +126,6 @@ Ce projet est sous licence MIT. Vous êtes libre de l'utiliser comme base pour v
 <sub>Dernière mise à jour : Janvier 2024</sub>
 
 </div>
-```
 
 
 
