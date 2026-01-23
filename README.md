@@ -5,13 +5,13 @@
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-success)
 ![Status](https://img.shields.io/badge/Status-Online-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Last Updated](https://img.shields.io/badge/January_2024-Updated-blue)
+![Last Updated](https://img.shields.io/badge/January_2026-Updated-blue)
 
 **Portfolio professionnel présentant mes compétences en Data Science, Machine Learning et Intelligence Artificielle**
 
-[ Site en ligne](https://davidaat.github.io) • 
+[ Site en ligne](https://davidaatportfolio.netlify.app/) • 
 [ Contact](mailto:meilleurd2001@gmail.com) • 
-[ LinkedIn](https://linkedin.com/in/david-meilleur-aat-ndongo)
+[ LinkedIn](https://www.linkedin.com/in/david-meilleur-aat-ndongo-bb43b0314?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 
 </div>
 
@@ -110,9 +110,9 @@ https://monsieurMechant200.github.io
 ##  Contact & Réseaux
 
 - **Email** : [meilleurd2001@gmail.com](mailto:meilleurd2001@gmail.com)
-- **LinkedIn** : [David Aat](https://linkedin.com/in/david-meilleur-aat-ndongo)
+- **LinkedIn** : [David Aat](https://www.linkedin.com/in/david-meilleur-aat-ndongo-bb43b0314?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 - **GitHub** : [@monsieurMechant200](https://github.com/monsieurMechant200)
-- **Portfolio** : [Mon portfolio](https://davidaat.github.io)
+- **Portfolio** : [Mon portfolio](https://davidaatportfolio.netlify.app/)
 
 ## Licence
 
@@ -123,10 +123,6 @@ Ce projet est sous licence MIT. Vous êtes libre de l'utiliser comme base pour v
 
 **"Transformer les données en insights, l'intelligence artificielle en solutions concrètes"**
 
-<sub>Dernière mise à jour : Janvier 2024</sub>
+<sub>Dernière mise à jour : Janvier 2026</sub>
 
 </div>
-
-
-
-Il donnera une excellente première impression aux visiteurs de votre GitHub ! 🚀
