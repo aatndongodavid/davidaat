@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         :root {
-            --bg: #064e3b;               /* Emerald dark background */
-            --surface: rgba(255,255,255,0.05);
+            --bg-inner: #0b8a78;
+            --bg-mid: #044e3b;
+            --bg-outer: #011411;
+            --surface: rgba(255,255,255,0.04);
             --border: rgba(255,255,255,0.12);
-            --primary: #34d399;          /* Light green accent */
+            --primary: #34d399;
             --primary-light: #6ee7b7;
             --accent: #a7f3d0;
             --text: #f1f5f9;
@@ -22,13 +24,13 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
 
         body {
-            background: var(--bg);
+            background: radial-gradient(circle at center, var(--bg-inner) 0%, var(--bg-mid) 50%, var(--bg-outer) 100%);
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
             overflow-x: hidden;
+            transition: background 1.2s ease;
         }
 
         /* Navigation */
@@ -38,14 +40,14 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            background: rgba(6, 78, 59, 0.7);
+            background: rgba(4, 78, 59, 0.6);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: 50px;
             padding: 10px 20px;
             display: flex;
             gap: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
         #navbar a {
             color: var(--muted);
@@ -55,7 +57,7 @@
             font-size: 0.85rem;
             padding: 8px 16px;
             border-radius: 30px;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
         }
         #navbar a:hover, #navbar a.active {
             color: #fff;
@@ -71,11 +73,36 @@
             #navbar a { font-size: 0.7rem; padding: 6px 12px; }
         }
 
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .float-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.2) 0%, transparent 70%);
+            filter: blur(1px);
+            transition: transform 0.2s ease-out;
+            animation: floatBob 12s ease-in-out infinite; /* Slow mo : 12s au lieu de 8s */
+        }
+        @keyframes floatBob {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(15deg); }
+        }
+
         /* Sections */
         section {
             max-width: 1200px;
             margin: 0 auto;
             padding: 120px 5% 80px;
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
@@ -96,12 +123,16 @@
             margin-bottom: 50px;
         }
 
+        /* Slow fade-in : durée augmentée */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
         }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* Hero */
         #hero {
@@ -160,7 +191,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             font-size: 0.9rem;
         }
         .btn-primary {
@@ -188,6 +219,7 @@
             border-radius: 50%;
             background: var(--primary-gradient);
             padding: 5px;
+            transition: transform 0.2s ease-out; /* Slow mo */
         }
         .hero-right .img-wrap {
             width: 100%;
@@ -196,7 +228,11 @@
             overflow: hidden;
             background: #064e3b;
         }
-        .hero-right img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         @media (max-width: 900px) {
             #hero { flex-direction: column; text-align: center; padding-top: 130px; }
@@ -210,7 +246,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 28px;
-            transition: all 0.3s;
+            transition: all 0.4s ease; /* Slow mo */
         }
         .glass-card:hover {
             border-color: rgba(52, 211, 153, 0.3);
@@ -223,7 +259,10 @@
             margin: 40px 0;
             padding-left: 30px;
         }
-        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
         .timeline-item::before {
             content: '';
             position: absolute;
@@ -249,7 +288,7 @@
             padding: 8px 20px;
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             font-size: 0.85rem;
         }
         .filter-btn.active, .filter-btn:hover {
@@ -268,7 +307,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 24px;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
         }
@@ -297,31 +336,28 @@
             color: var(--primary);
             padding: 6px 14px; border-radius: 8px;
             font-size: 0.75rem; font-weight: 600;
-            text-decoration: none; transition: all 0.2s;
+            text-decoration: none; transition: all 0.3s ease;
         }
         .project-links a:hover { background: rgba(52, 211, 153, 0.2); }
 
-        /* Skills tags with shimmer animation */
+        /* Skills tags with slow shimmer */
         .skill-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
         .skill-tag {
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
             background: rgba(255,255,255,0.05);
             border: 1px solid var(--border);
             color: var(--text);
             padding: 8px 18px;
             border-radius: 30px;
             font-size: 0.85rem;
-            transition: 0.3s;
-            cursor: default;
+            transition: 0.4s ease;
         }
         .skill-tag::after {
             content: '';
-            position: absolute;
-            top: 0; left: -100%;
+            position: absolute; top: 0; left: -100%;
             width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            animation: shimmer 3s infinite;
+            animation: shimmer 5s infinite; /* Slow mo : 5s */
         }
         @keyframes shimmer {
             0% { left: -100%; }
@@ -345,11 +381,11 @@
             align-items: center; justify-content: center;
             color: var(--muted);
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             font-size: 0.7rem; font-weight: 700;
             text-transform: uppercase; letter-spacing: 1px;
         }
-        .icon-card i { font-size: 1.8rem; margin-bottom: 8px; transition: 0.3s; }
+        .icon-card i { font-size: 1.8rem; margin-bottom: 8px; transition: 0.4s ease; }
         .icon-card:hover {
             border-color: var(--icolor);
             color: #fff;
@@ -371,7 +407,7 @@
             backdrop-filter: blur(10px);
             z-index: 2000;
             display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: 0.3s;
+            opacity: 0; pointer-events: none; transition: 0.4s ease;
         }
         .modal-overlay.open { opacity: 1; pointer-events: all; }
         .modal {
@@ -383,7 +419,7 @@
             position: relative;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             transform: scale(0.95);
-            transition: transform 0.3s;
+            transition: transform 0.4s ease;
         }
         .modal-overlay.open .modal { transform: scale(1); }
         .modal-close {
@@ -396,6 +432,9 @@
     </style>
 </head>
 <body>
+    <!-- Floating decorative elements -->
+    <div class="floating-elements" id="floatingElements"></div>
+
     <nav id="navbar">
         <a href="#hero" class="active" data-section="hero">Accueil</a>
         <a href="#apropos" data-section="apropos">Parcours</a>
@@ -418,7 +457,7 @@
                 <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Me contacter</a>
             </div>
         </div>
-        <div class="hero-right fade-in">
+        <div class="hero-right fade-in" id="heroProfile">
             <div class="img-wrap">
                 <img src="images/pp.jpg" alt="David Meilleur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
                 <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:3rem; color:var(--primary);"><i class="fas fa-user-astronaut"></i></div>
@@ -438,6 +477,12 @@
                 <div class="timeline-title">Founder & Lead</div>
                 <div class="timeline-org">DATAIKÔS</div>
                 <div class="timeline-desc">Pilotage de projets de bout en bout, coordination d'une équipe de 11 personnes, modélisation et systèmes embarqués. <a href="https://dataikos.netlify.app/" target="_blank" style="color:var(--primary);">Site web →</a></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Mars 2025 – Août 2025</div>
+                <div class="timeline-title">Graphic Designer & Monteur Vidéo</div>
+                <div class="timeline-org">FAST TRAVEL SERVICES</div>
+                <div class="timeline-desc">Création d'identités visuelles, montage vidéo, supports de communication print et web, gestion des réseaux sociaux.</div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date">Janvier 2024 – Présent</div>
@@ -462,8 +507,8 @@
         <div class="fade-in" style="margin-top: 60px;">
             <h3 style="font-family:'Syne',sans-serif; color:var(--primary); margin-bottom: 20px;">Formation</h3>
             <div class="glass-card" style="margin-bottom: 20px;">
-                <p style="color:#fff;"><strong>Ingénierie Data Science & IA</strong> – ENSPD, Douala (en cours)</p>
-                <p style="color:var(--muted); font-size:0.9rem;">Processus stochastiques, Deep Learning, MLOps</p>
+                <p style="color:#fff;"><strong>Diplôme d'Ingénieur en Data Science & IA (Licence)</strong> – ENSPD, Douala</p>
+                <p style="color:var(--muted); font-size:0.9rem;">Obtenu en 2026 · Processus stochastiques, Deep Learning, MLOps</p>
             </div>
             <div class="glass-card" style="margin-bottom: 20px;">
                 <p style="color:#fff;"><strong>Licence Génie Électrique & Informatique Industrielle</strong> – IUT Douala (2020-2023)</p>
@@ -564,6 +609,7 @@
                 <h4 style="color:var(--accent);">Expériences</h4>
                 <ul style="color:var(--muted);font-size:0.9rem;list-style:none;padding-left:0;">
                     <li>▸ Founder DATAIKÔS (2026-Présent)</li>
+                    <li>▸ Fast Travel Services – Graphic Designer (Mars-Août 2025)</li>
                     <li>▸ Intelcia – Customer Relationship Specialist (2024-Présent)</li>
                     <li>▸ Vista Language Center – Infographiste (stage 2023)</li>
                     <li>▸ Village de l'Informatique – Maintenance (stage 2020)</li>
@@ -572,7 +618,7 @@
             <div style="margin-bottom:16px;">
                 <h4 style="color:var(--accent);">Projets clés</h4>
                 <ul style="color:var(--muted);font-size:0.9rem;list-style:none;padding-left:0;">
-                    <li>▸ Flux_Forcast Call Center Simulator</li>
+                    <li>▸ Intelcia Call Center Simulator</li>
                     <li>▸ Embedded AI: Quantization MobileNetV1</li>
                     <li>▸ MAPEBE – Gestion agricole</li>
                     <li>▸ Dataikos Atlas – CRM & prévisions</li>
@@ -582,10 +628,23 @@
     </div>
 
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        // Generate floating decorative shapes
+        (function() {
+            const container = document.getElementById('floatingElements');
+            const count = 16;
+            for (let i = 0; i < count; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'float-shape';
+                const size = Math.random() * 40 + 10;
+                shape.style.width = size + 'px';
+                shape.style.height = size + 'px';
+                shape.style.left = Math.random() * 100 + '%';
+                shape.style.top = Math.random() * 100 + '%';
+                shape.style.animationDuration = (Math.random() * 8 + 8) + 's'; /* Slow mo */
+                shape.style.animationDelay = Math.random() * 6 + 's';
+                container.appendChild(shape);
+            }
+        })();
 
         // Scroll spy
         const sections = document.querySelectorAll('section');
@@ -602,9 +661,36 @@
             });
         });
 
-        // Projects data (emojis replaced by Font Awesome)
+        // Slow fade-in observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Slow parallax on floating shapes and hero profile
+        let mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
+        });
+
+        function animateParallax() {
+            const shapes = document.querySelectorAll('.float-shape');
+            shapes.forEach((shape, i) => {
+                const speed = 8 + i * 0.5; /* Slow mo : réduction de la vitesse */
+                shape.style.transform = `translate(${mouseX * speed}px, ${mouseY * speed}px)`;
+            });
+            const heroProfile = document.getElementById('heroProfile');
+            if (heroProfile) {
+                heroProfile.style.transform = `translate(${mouseX * 10}px, ${mouseY * 10}px)`;
+            }
+            requestAnimationFrame(animateParallax);
+        }
+        animateParallax();
+
+        // Projects data (Font Awesome icons)
         const projects = [
-            { icon: '<i class="fas fa-headset"></i>', title: 'Flux_Forcast Call Center Simulator', tags: ['Python','Erlang-C','Stochastic'], desc: 'Simulateur de flux d’appels avec loi de Poisson et actualisation 30 min.', links: [{ label: 'GitHub', icon: 'fab fa-github', href: 'https://github.com/monsieurMechant200' }], category: 'ai' },
+            { icon: '<i class="fas fa-headset"></i>', title: 'Intelcia Call Center Simulator', tags: ['Python','Erlang-C','Stochastic'], desc: 'Simulateur de flux d’appels avec loi de Poisson et actualisation 30 min.', links: [{ label: 'GitHub', icon: 'fab fa-github', href: 'https://github.com/monsieurMechant200' }], category: 'ai' },
             { icon: '<i class="fas fa-microchip"></i>', title: 'Embedded AI: Quantization', tags: ['TensorFlow','STM32','KWS'], desc: 'Optimisation de MobileNetV1 pour reconnaissance de mots-clés.', links: [{ label: 'GitHub', icon: 'fab fa-github', href: 'https://github.com/monsieurMechant200' }], category: 'embedded' },
             { icon: '<i class="fas fa-seedling"></i>', title: 'MAPEBE – Gestion Agricole', tags: ['Python','Desktop','Neon UI'], desc: 'Application desktop avec synchronisation, rapports PDF et dashboard.', links: [], category: 'desktop' },
             { icon: '<i class="fas fa-chart-bar"></i>', title: 'Dataikos Atlas', tags: ['ARIMA','CRM','Prévisions'], desc: 'Gestion commerciale, stocks et prédictions financières.', links: [{ label: 'Site', icon: 'fas fa-globe', href: 'https://dataikos.netlify.app/' }], category: 'ai' },
