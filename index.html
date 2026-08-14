@@ -306,7 +306,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 24px;
+            padding: 16px;
             transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
@@ -316,8 +316,9 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 30px rgba(0,0,0,0.3);
         }
-        .project-icon { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
-        .project-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+        .project-thumb img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; display:block; margin-bottom:12px; }
+        .project-icon { font-size: 1.6rem; margin-bottom: 8px; color: var(--primary); }
+        .project-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
         .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
         .project-tag {
             background: rgba(52, 211, 153, 0.1);
@@ -327,17 +328,10 @@
             font-size: 0.7rem;
             font-weight: 500;
         }
-        .project-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.5; flex: 1; }
-        .project-links { margin-top: 16px; display: flex; gap: 10px; }
-        .project-links a {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(52, 211, 153, 0.1);
-            border: 1px solid rgba(52, 211, 153, 0.2);
-            color: var(--primary);
-            padding: 6px 14px; border-radius: 8px;
-            font-size: 0.75rem; font-weight: 600;
-            text-decoration: none; transition: all 0.3s ease;
-        }
+        .project-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.4; flex: 1; }
+        .project-links { margin-top: 12px; display: flex; gap: 10px; flex-wrap:wrap; }
+        .project-links a { display: inline-flex; align-items: center; gap: 6px; background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.2); color: var(--primary); padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+        .detail-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 8px 12px; border-radius: 8px; cursor:pointer; }
         .project-links a:hover { background: rgba(52, 211, 153, 0.2); }
 
         /* Skills tags with slow shimmer */
@@ -400,7 +394,7 @@
             color: var(--muted); font-size: 0.9rem;
         }
 
-        /* Modal CV */
+        /* Modal CV + project modal */
         .modal-overlay {
             position: fixed; inset: 0;
             background: rgba(0,0,0,0.6);
@@ -413,9 +407,9 @@
         .modal {
             background: #064e3b;
             border: 1px solid var(--border);
-            border-radius: 24px; padding: 40px;
-            max-width: 600px; width: 90%;
-            max-height: 80vh; overflow-y: auto;
+            border-radius: 24px; padding: 24px;
+            max-width: 900px; width: 95%;
+            max-height: 85vh; overflow-y: auto;
             position: relative;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             transform: scale(0.95);
@@ -423,12 +417,17 @@
         }
         .modal-overlay.open .modal { transform: scale(1); }
         .modal-close {
-            position: absolute; top: 16px; right: 16px;
+            position: absolute; top: 12px; right: 12px;
             background: rgba(255,255,255,0.05);
             border: 1px solid var(--border); color: var(--text);
-            width: 32px; height: 32px; border-radius: 50%;
-            cursor: pointer;
+            width: 36px; height: 36px; border-radius: 50%;
+            cursor: pointer; display:flex; align-items:center; justify-content:center;
         }
+        .project-modal-header { display:flex; gap:18px; align-items:flex-start; }
+        .project-modal-thumb { width: 320px; flex-shrink:0; }
+        .project-modal-thumb img { width:100%; height:200px; object-fit:cover; border-radius:12px; }
+        .project-modal-body { flex:1; }
+        @media (max-width:900px){ .project-modal-header{flex-direction:column} .project-modal-thumb{width:100%} }
     </style>
 </head>
 <body>
@@ -476,7 +475,7 @@
                 <div class="timeline-date">Avril 2026 – Présent</div>
                 <div class="timeline-title">Founder & Lead</div>
                 <div class="timeline-org">DATAIKÔS</div>
-                <div class="timeline-desc">Pilotage de projets de bout en bout, coordination d'une équipe de 11 personnes, modélisation et systèmes embarqués. <a href="https://dataikos.netlif[...]"></a>
+                <div class="timeline-desc">Pilotage de projets de bout en bout, coordination d'une équipe de 11 personnes, modélisation et systèmes embarqués.</div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date">Mars 2025 – Août 2025</div>
@@ -548,6 +547,7 @@
             <button class="filter-btn" data-filter="web">Web & APIs</button>
             <button class="filter-btn" data-filter="desktop">Desktop & Automatisation</button>
             <button class="filter-btn" data-filter="embedded">Embarqué</button>
+            <button class="filter-btn" data-filter="tools">Outils</button>
         </div>
         <div class="projects-grid fade-in" id="projectsGrid"></div>
     </section>
@@ -627,6 +627,22 @@
         </div>
     </div>
 
+    <!-- Project modal overlay -->
+    <div class="modal-overlay" id="projectModalOverlay">
+        <div class="modal" id="projectModal">
+            <button class="modal-close" id="projectModalClose"><i class="fas fa-times"></i></button>
+            <div class="project-modal-header">
+                <div class="project-modal-thumb" id="projectModalThumb"></div>
+                <div class="project-modal-body">
+                    <h3 id="projectModalTitle" style="color:var(--primary);font-family:'Syne',sans-serif;"></h3>
+                    <div id="projectModalTags" style="margin-bottom:8px;"></div>
+                    <p id="projectModalDesc" style="color:var(--muted);"></p>
+                    <div id="projectModalLinks" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Generate floating decorative shapes
         (function() {
@@ -688,28 +704,32 @@
         }
         animateParallax();
 
-        // Projects data (Font Awesome icons) — ajout de tous les dépôts publics et des liens live quand disponibles
+        // Helper for thumbnail placeholder
+        function thumbFor(title){
+            return 'https://via.placeholder.com/600x360?text='+encodeURIComponent(title);
+        }
+
+        // Projects data with category and thumbnail
         const projects = [
-            { icon: '<i class="fas fa-gamepad"></i>', title: 'dames_game_rl', tags: ['Reinforcement Learning','Python'], desc: 'Agent RL pour le jeu de dames. Voir le dépôt pour instructions.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/dames_game_rl', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-database"></i>', title: 'dataikos', tags: ['Data','Backend'], desc: 'Outils et services internes DATAIKÔS (dépôt principal).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/dataikos', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-rocket"></i>', title: 'DATAIKOSLEARN', tags: ['Web','Vercel','Learning'], desc: 'Plateforme d’apprentissage DATAIKÔS — version déployée.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/DATAIKOSLEARN', icon: 'fab fa-github' }, { label: 'Live', href: 'https://dataikoslearn.vercel.app', icon: 'fas fa-external-link-alt' }] },
-            { icon: '<i class="fas fa-chart-line"></i>', title: 'DATAIKOS_ATLAS', tags: ['ARIMA','CRM','Prévisions'], desc: 'Atlas de DATAIKÔS pour CRM et prévisions (voir dépôt).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/DATAIKOS_ATLAS', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-envelope-open-text"></i>', title: 'Dataikos_Mailer', tags: ['Email','Automation'], desc: 'Plateforme d’envoi d’e-mails personnalisés à grande échelle.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Dataikos_Mailer', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-shield-virus"></i>', title: 'DATAIKOS_VIBE_SHIELD_APPEL', tags: ['Simulation','Monitoring'], desc: 'Projet lié à la surveillance des flux d’appels.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/DATAIKOS_VIBE_SHIELD_APPEL', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-portrait"></i>', title: 'davidaat (Portfolio)', tags: ['Web','Portfolio'], desc: 'Site personnel (ce portfolio) — dépôt source.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/davidaat', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-project-diagram"></i>', title: 'flux_forcast', tags: ['Stochastic','Simulator'], desc: 'Flux Forecast — simulateur de flux d’appels et métriques.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/flux_forcast', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-chalkboard-teacher"></i>', title: 'FORMATION-DATAIKOS', tags: ['Web','Vercel','Training'], desc: 'Site de formation DATAIKÔS — page déployée.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/FORMATION-DATAIKOS', icon: 'fab fa-github' }, { label: 'Live', href: 'https://formation-dataikos.vercel.app', icon: 'fas fa-external-link-alt' }] },
-            { icon: '<i class="fas fa-gas-pump"></i>', title: 'Fuel_Saver', tags: ['IoT','Efficiency'], desc: 'Outils d’optimisation de consommation carburant.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Fuel_Saver', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-comments"></i>', title: 'GOOD-DEAL-CHAT', tags: ['Chat','Realtime'], desc: 'Application de chat pour bonnes affaires.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/GOOD-DEAL-CHAT', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-school"></i>', title: 'maternelle-connect', tags: ['Education','Web'], desc: 'Connectivité et outils pour maternelles.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/maternelle-connect', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-exchange-alt"></i>', title: 'maternelle-proxy', tags: ['Web','Vercel','Proxy'], desc: 'Proxy / interface pour maternelle — déployé.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/maternelle-proxy', icon: 'fab fa-github' }, { label: 'Live', href: 'https://maternelle-proxy.vercel.app', icon: 'fas fa-external-link-alt' }] },
-            { icon: '<i class="fas fa-database"></i>', title: 'N-BASE', tags: ['DB','Storage'], desc: 'Projet N-BASE — stockage / traces.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/N-BASE', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-plug"></i>', title: 'projet_ENEO', tags: ['Hardware','Integration'], desc: 'Projet lié à ENEO — intégration systèmes.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/projet_ENEO', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-lock"></i>', title: 'SecEff', tags: ['Security','Research'], desc: 'Projets de sécurité informatique et efficacité.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/SecEff', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-handshake"></i>', title: 'SOCOOPCA', tags: ['Coop','Management'], desc: 'Solution pour coopératives (SOCOOPCA).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/SOCOOPCA', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-user-graduate"></i>', title: 'student-prediction-interface', tags: ['ML','Flask','Web'], desc: 'Interface web pour prédiction de réussite étudiante.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/student-prediction-interface', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-flask"></i>', title: 'Tatiana_IA', tags: ['NLP','Assistant'], desc: 'Assistant intelligent (NLP) — Tatiana IA.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Tatiana_IA', icon: 'fab fa-github' }] },
-            { icon: '<i class="fas fa-globe"></i>', title: 'website', tags: ['Web','Showcase'], desc: 'Site web / démonstration.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/website', icon: 'fab fa-github' }] }
+            { icon: '<i class="fas fa-gamepad"></i>', title: 'dames_game_rl', category: 'ai', tags: ['Reinforcement Learning','Python'], thumb: thumbFor('dames_game_rl'), desc: 'Agent RL pour le jeu de dames. Voir le dépôt pour instructions.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/dames_game_rl', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-database"></i>', title: 'dataikos', category: 'web', tags: ['Data','Backend'], thumb: thumbFor('dataikos'), desc: 'Outils et services internes DATAIKÔS (dépôt principal).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/dataikos', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-rocket"></i>', title: 'DATAIKOSLEARN', category: 'web', tags: ['Web','Vercel','Learning'], thumb: thumbFor('DATAIKOSLEARN'), desc: 'Plateforme d’apprentissage DATAIKÔS — version déployée.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/DATAIKOSLEARN', icon: 'fab fa-github' }, { label: 'Live', href: 'https://dataikoslearn.vercel.app', icon: 'fas fa-external-link-alt' }] },
+            { icon: '<i class="fas fa-chart-line"></i>', title: 'DATAIKOS_ATLAS', category: 'ai', tags: ['ARIMA','CRM','Prévisions'], thumb: thumbFor('DATAIKOS_ATLAS'), desc: 'Atlas de DATAIKÔS pour CRM et prévisions (voir dépôt).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/DATAIKOS_ATLAS', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-envelope-open-text"></i>', title: 'Dataikos_Mailer', category: 'web', tags: ['Email','Automation'], thumb: thumbFor('Dataikos_Mailer'), desc: 'Plateforme d’envoi d’e-mails personnalisés à grande échelle.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Dataikos_Mailer', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-project-diagram"></i>', title: 'flux_forcast', category: 'ai', tags: ['Stochastic','Simulator'], thumb: thumbFor('flux_forcast'), desc: 'Flux Forecast — simulateur de flux d’appels et métriques.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/flux_forcast', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-chalkboard-teacher"></i>', title: 'FORMATION-DATAIKOS', category: 'web', tags: ['Web','Vercel','Training'], thumb: thumbFor('FORMATION-DATAIKOS'), desc: 'Site de formation DATAIKÔS — page déployée.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/FORMATION-DATAIKOS', icon: 'fab fa-github' }, { label: 'Live', href: 'https://formation-dataikos.vercel.app', icon: 'fas fa-external-link-alt' }] },
+            { icon: '<i class="fas fa-gas-pump"></i>', title: 'Fuel_Saver', category: 'embedded', tags: ['IoT','Efficiency'], thumb: thumbFor('Fuel_Saver'), desc: 'Outils d’optimisation de consommation carburant.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Fuel_Saver', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-comments"></i>', title: 'GOOD-DEAL-CHAT', category: 'web', tags: ['Chat','Realtime'], thumb: thumbFor('GOOD-DEAL-CHAT'), desc: 'Application de chat pour bonnes affaires.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/GOOD-DEAL-CHAT', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-school"></i>', title: 'maternelle-connect', category: 'web', tags: ['Education','Web'], thumb: thumbFor('maternelle-connect'), desc: 'Connectivité et outils pour maternelles.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/maternelle-connect', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-exchange-alt"></i>', title: 'maternelle-proxy', category: 'web', tags: ['Web','Vercel','Proxy'], thumb: thumbFor('maternelle-proxy'), desc: 'Proxy / interface pour maternelle — déployé.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/maternelle-proxy', icon: 'fab fa-github' }, { label: 'Live', href: 'https://maternelle-proxy.vercel.app', icon: 'fas fa-external-link-alt' }] },
+            { icon: '<i class="fas fa-database"></i>', title: 'N-BASE', category: 'tools', tags: ['DB','Storage'], thumb: thumbFor('N-BASE'), desc: 'Projet N-BASE — stockage / traces.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/N-BASE', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-plug"></i>', title: 'projet_ENEO', category: 'embedded', tags: ['Hardware','Integration'], thumb: thumbFor('projet_ENEO'), desc: 'Projet lié à ENEO — intégration systèmes.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/projet_ENEO', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-lock"></i>', title: 'SecEff', category: 'tools', tags: ['Security','Research'], thumb: thumbFor('SecEff'), desc: 'Projets de sécurité informatique et efficacité.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/SecEff', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-handshake"></i>', title: 'SOCOOPCA', category: 'web', tags: ['Coop','Management'], thumb: thumbFor('SOCOOPCA'), desc: 'Solution pour coopératives (SOCOOPCA).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/SOCOOPCA', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-user-graduate"></i>', title: 'student-prediction-interface', category: 'ai', tags: ['ML','Flask','Web'], thumb: thumbFor('student-prediction-interface'), desc: 'Interface web pour prédiction de réussite étudiante.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/student-prediction-interface', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-flask"></i>', title: 'Tatiana_IA', category: 'ai', tags: ['NLP','Assistant'], thumb: thumbFor('Tatiana_IA'), desc: 'Assistant intelligent (NLP) — Tatiana IA.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Tatiana_IA', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-globe"></i>', title: 'website', category: 'web', tags: ['Web','Showcase'], thumb: thumbFor('website'), desc: 'Site web / démonstration.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/website', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-portrait"></i>', title: 'davidaat (Portfolio)', category: 'web', tags: ['Web','Portfolio'], thumb: thumbFor('davidaat'), desc: 'Site personnel (ce portfolio) — dépôt source.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/davidaat', icon: 'fab fa-github' }] }
         ];
 
         const grid = document.getElementById('projectsGrid');
@@ -718,17 +738,22 @@
         function renderProjects(filter = 'all') {
             grid.innerHTML = '';
             const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
-            filtered.forEach(p => {
+            filtered.forEach((p, idx) => {
                 const card = document.createElement('div');
                 card.className = 'project-card fade-in';
                 const linksHTML = (p.links || []).map(l => `<a href="${l.href}" target="_blank"><i class="${l.icon}"></i>${l.label}</a>`).join('');
                 card.innerHTML = `
+                    <div class="project-thumb"><img src="${p.thumb}" alt="${p.title}" /></div>
                     <div class="project-icon">${p.icon}</div>
                     <div class="project-title">${p.title}</div>
                     <div class="project-tags">${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}</div>
                     <div class="project-desc">${p.desc}</div>
                     <div class="project-links">${linksHTML || '<span style="color:var(--muted);font-size:0.75rem;">Sur demande</span>'}</div>
+                    <div style="margin-top:10px; display:flex; gap:10px;">
+                        <button class="detail-btn" data-index="${idx}">Détails</button>
+                    </div>
                 `;
+                card.querySelector('.detail-btn').addEventListener('click', () => openProjectModal(idx));
                 grid.appendChild(card);
                 observer.observe(card);
             });
@@ -742,6 +767,24 @@
             });
         });
         renderProjects();
+
+        // Project modal logic
+        const projectModalOverlay = document.getElementById('projectModalOverlay');
+        const projectModalClose = document.getElementById('projectModalClose');
+        function openProjectModal(index){
+            const p = projects[index];
+            document.getElementById('projectModalThumb').innerHTML = `<img src="${p.thumb}" alt="${p.title}" />`;
+            document.getElementById('projectModalTitle').textContent = p.title;
+            document.getElementById('projectModalDesc').textContent = p.desc;
+            const tagsEl = document.getElementById('projectModalTags');
+            tagsEl.innerHTML = p.tags.map(t => `<span class="project-tag">${t}</span>`).join(' ');
+            const linksEl = document.getElementById('projectModalLinks');
+            linksEl.innerHTML = (p.links || []).map(l => `<a href="${l.href}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);color:var(--primary);text-decoration:none;font-weight:600;"><i class="${l.icon}"></i>${l.label}</a>`).join(' ');
+
+            projectModalOverlay.classList.add('open');
+        }
+        projectModalClose.addEventListener('click', () => projectModalOverlay.classList.remove('open'));
+        projectModalOverlay.addEventListener('click', (e) => { if (e.target === projectModalOverlay) projectModalOverlay.classList.remove('open'); });
 
         // CV modal
         const overlay = document.getElementById('modalOverlay');
