@@ -476,7 +476,7 @@
                 <div class="timeline-date">Avril 2026 – Présent</div>
                 <div class="timeline-title">Founder & Lead</div>
                 <div class="timeline-org">DATAIKÔS</div>
-                <div class="timeline-desc">Pilotage de projets de bout en bout, coordination d'une équipe de 11 personnes, modélisation et systèmes embarqués. <a href="https://dataikos.netlify.app/" target="_blank" style="color:var(--primary);">Site web →</a></div>
+                <div class="timeline-desc">Pilotage de projets de bout en bout, coordination d'une équipe de 11 personnes, modélisation et systèmes embarqués. <a href="https://dataikos.netlif[...]"></a>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date">Mars 2025 – Août 2025</div>
@@ -688,17 +688,28 @@
         }
         animateParallax();
 
-        // Projects data (Font Awesome icons)
+        // Projects data (Font Awesome icons) — ajout de tous les dépôts publics et des liens live quand disponibles
         const projects = [
-            { icon: '<i class="fas fa-headset"></i>', title: 'Flux Forcast', tags: ['Python','Erlang-C','Stochastic'], desc: 'Simulateur de flux d’appels avec loi de Poisson et actualisation 30 min.', links: [{ label: 'GitHub', icon: 'fab fa-github', href: 'https://github.com/monsieurMechant200' }], category: 'ai' },
-            { icon: '<i class="fas fa-microchip"></i>', title: 'Embedded AI: Quantization', tags: ['TensorFlow','STM32','KWS'], desc: 'Optimisation de MobileNetV1 pour reconnaissance de mots-clés.', links: [{ label: 'GitHub', icon: 'fab fa-github', href: 'https://github.com/monsieurMechant200' }], category: 'embedded' },
-            { icon: '<i class="fas fa-seedling"></i>', title: 'MAPEBE – Gestion Agricole', tags: ['Python','Desktop','Neon UI'], desc: 'Application desktop avec synchronisation, rapports PDF et dashboard.', links: [], category: 'desktop' },
-            { icon: '<i class="fas fa-chart-bar"></i>', title: 'Dataikos Atlas', tags: ['ARIMA','CRM','Prévisions'], desc: 'Gestion commerciale, stocks et prédictions financières.', links: [{ label: 'Site', icon: 'fas fa-globe', href: 'https://dataikos.netlify.app/' }], category: 'ai' },
-            { icon: '<i class="fas fa-flask"></i>', title: 'Tatiana IA', tags: ['NLP','FastAPI','Chemistry'], desc: 'Assistant chimique intelligent avec traitement du langage naturel.', links: [{ label: 'GitHub', icon: 'fab fa-github', href: 'https://github.com/monsieurMechant200/Tatiana_IA' }], category: 'ai' },
-            { icon: '<i class="fas fa-envelope"></i>', title: 'Dataikos Mailer', tags: ['Email','Automation','Python'], desc: 'Plateforme d’envoi d’emails personnalisés à grande échelle.', links: [{ label: 'Démo', icon: 'fas fa-external-link-alt', href: 'https://dataikos-mailer.onrender.com/' }], category: 'web' },
-            { icon: '<i class="fas fa-graduation-cap"></i>', title: 'Student Success Predictor', tags: ['ML','Scikit-learn','Flask'], desc: 'Application web prédictive de réussite scolaire.', links: [{ label: 'Démo', icon: 'fas fa-external-link-alt', href: 'https://student-prediction-interface.onrender.com/' }], category: 'web' },
-            { icon: '<i class="fas fa-clipboard-list"></i>', title: 'EYOUM\'SHOP Facturation', tags: ['Excel VBA','Automatisation'], desc: 'Système de facturation automatisé sous Excel VBA.', links: [], category: 'desktop' },
-            { icon: '<i class="fas fa-paint-brush"></i>', title: 'Formation Infographie Pro', tags: ['Pédagogie','Design','Certification'], desc: 'Programme de formation certifiante en infographie professionnelle.', links: [], category: 'desktop' }
+            { icon: '<i class="fas fa-gamepad"></i>', title: 'dames_game_rl', tags: ['Reinforcement Learning','Python'], desc: 'Agent RL pour le jeu de dames. Voir le dépôt pour instructions.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/dames_game_rl', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-database"></i>', title: 'dataikos', tags: ['Data','Backend'], desc: 'Outils et services internes DATAIKÔS (dépôt principal).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/dataikos', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-rocket"></i>', title: 'DATAIKOSLEARN', tags: ['Web','Vercel','Learning'], desc: 'Plateforme d’apprentissage DATAIKÔS — version déployée.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/DATAIKOSLEARN', icon: 'fab fa-github' }, { label: 'Live', href: 'https://dataikoslearn.vercel.app', icon: 'fas fa-external-link-alt' }] },
+            { icon: '<i class="fas fa-chart-line"></i>', title: 'DATAIKOS_ATLAS', tags: ['ARIMA','CRM','Prévisions'], desc: 'Atlas de DATAIKÔS pour CRM et prévisions (voir dépôt).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/DATAIKOS_ATLAS', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-envelope-open-text"></i>', title: 'Dataikos_Mailer', tags: ['Email','Automation'], desc: 'Plateforme d’envoi d’e-mails personnalisés à grande échelle.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Dataikos_Mailer', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-shield-virus"></i>', title: 'DATAIKOS_VIBE_SHIELD_APPEL', tags: ['Simulation','Monitoring'], desc: 'Projet lié à la surveillance des flux d’appels.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/DATAIKOS_VIBE_SHIELD_APPEL', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-portrait"></i>', title: 'davidaat (Portfolio)', tags: ['Web','Portfolio'], desc: 'Site personnel (ce portfolio) — dépôt source.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/davidaat', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-project-diagram"></i>', title: 'flux_forcast', tags: ['Stochastic','Simulator'], desc: 'Flux Forecast — simulateur de flux d’appels et métriques.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/flux_forcast', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-chalkboard-teacher"></i>', title: 'FORMATION-DATAIKOS', tags: ['Web','Vercel','Training'], desc: 'Site de formation DATAIKÔS — page déployée.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/FORMATION-DATAIKOS', icon: 'fab fa-github' }, { label: 'Live', href: 'https://formation-dataikos.vercel.app', icon: 'fas fa-external-link-alt' }] },
+            { icon: '<i class="fas fa-gas-pump"></i>', title: 'Fuel_Saver', tags: ['IoT','Efficiency'], desc: 'Outils d’optimisation de consommation carburant.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Fuel_Saver', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-comments"></i>', title: 'GOOD-DEAL-CHAT', tags: ['Chat','Realtime'], desc: 'Application de chat pour bonnes affaires.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/GOOD-DEAL-CHAT', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-school"></i>', title: 'maternelle-connect', tags: ['Education','Web'], desc: 'Connectivité et outils pour maternelles.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/maternelle-connect', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-exchange-alt"></i>', title: 'maternelle-proxy', tags: ['Web','Vercel','Proxy'], desc: 'Proxy / interface pour maternelle — déployé.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/maternelle-proxy', icon: 'fab fa-github' }, { label: 'Live', href: 'https://maternelle-proxy.vercel.app', icon: 'fas fa-external-link-alt' }] },
+            { icon: '<i class="fas fa-database"></i>', title: 'N-BASE', tags: ['DB','Storage'], desc: 'Projet N-BASE — stockage / traces.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/N-BASE', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-plug"></i>', title: 'projet_ENEO', tags: ['Hardware','Integration'], desc: 'Projet lié à ENEO — intégration systèmes.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/projet_ENEO', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-lock"></i>', title: 'SecEff', tags: ['Security','Research'], desc: 'Projets de sécurité informatique et efficacité.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/SecEff', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-handshake"></i>', title: 'SOCOOPCA', tags: ['Coop','Management'], desc: 'Solution pour coopératives (SOCOOPCA).', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/SOCOOPCA', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-user-graduate"></i>', title: 'student-prediction-interface', tags: ['ML','Flask','Web'], desc: 'Interface web pour prédiction de réussite étudiante.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/student-prediction-interface', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-flask"></i>', title: 'Tatiana_IA', tags: ['NLP','Assistant'], desc: 'Assistant intelligent (NLP) — Tatiana IA.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/Tatiana_IA', icon: 'fab fa-github' }] },
+            { icon: '<i class="fas fa-globe"></i>', title: 'website', tags: ['Web','Showcase'], desc: 'Site web / démonstration.', links: [{ label: 'GitHub', href: 'https://github.com/aatndongodavid/website', icon: 'fab fa-github' }] }
         ];
 
         const grid = document.getElementById('projectsGrid');
@@ -710,7 +721,7 @@
             filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'project-card fade-in';
-                const linksHTML = p.links.map(l => `<a href="${l.href}" target="_blank"><i class="${l.icon}"></i>${l.label}</a>`).join('');
+                const linksHTML = (p.links || []).map(l => `<a href="${l.href}" target="_blank"><i class="${l.icon}"></i>${l.label}</a>`).join('');
                 card.innerHTML = `
                     <div class="project-icon">${p.icon}</div>
                     <div class="project-title">${p.title}</div>
