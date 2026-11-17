@@ -1,0 +1,27 @@
+---
+const links = [
+  { id: 'hero', label: 'Accueil' },
+  { id: 'apropos', label: 'Parcours' },
+  { id: 'profils', label: 'Profils' },
+  { id: 'projets', label: 'Projets' },
+  { id: 'cv', label: 'CV' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+<nav id="navbar" aria-label="Navigation principale">
+  {links.map((l, i) => (
+    <a href={`#${l.id}`} data-section={l.id} class={i === 0 ? 'active' : undefined}>{l.label}</a>
+  ))}
+</nav>
+
+<script>
+  const sections = document.querySelectorAll<HTMLElement>('section[id]');
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('#navbar a');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      navLinks.forEach((a) => a.classList.toggle('active', a.dataset.section === e.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach((s) => spy.observe(s));
+</script>

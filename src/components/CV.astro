@@ -1,0 +1,26 @@
+---
+import { profiles } from '../data/profile';
+---
+<section id="cv" class="centered">
+  <div class="fade-in">
+    <h2 class="section-title"><span>Curriculum</span> Vitæ</h2>
+    <p class="section-sub">Téléchargez le CV correspondant à votre besoin.</p>
+  </div>
+  <div class="glass-card fade-in cv-card">
+    <div class="cv-icon"><i class="fas fa-file-pdf"></i></div>
+    <h3>David Meilleur</h3>
+    <p class="cv-sub">Data Scientist · AI Engineer · Software & IT Engineer</p>
+    <div class="cv-buttons">
+      {profiles.map((p) => (
+        <a href={`/documents/${p.cv}`} download class="cv-btn"><i class={p.icon}></i> {p.cvLabel}</a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cv-card { max-width: 800px; margin: 0 auto; }
+  .cv-icon { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+  h3 { font-family: 'Syne', sans-serif; font-size: 1.5rem; }
+  .cv-sub { color: var(--muted); margin: 20px 0; }
+</style>

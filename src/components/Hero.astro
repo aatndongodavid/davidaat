@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/images/pp.jpg';
+---
+<section id="hero">
+  <div class="hero-left fade-in">
+    <div class="hero-badge"><i class="fas fa-brain"></i> Data · AI · Software</div>
+    <h1 class="hero-title">AAT NDONGO<br /><span class="highlight">David Meilleur</span></h1>
+    <p class="hero-sub">Data Scientist · AI Engineer · Software & IT Engineer</p>
+    <p class="hero-tagline">
+      « De la donnée à l’intelligence, du code à l’infrastructure, je construis des solutions robustes et innovantes. »
+    </p>
+    <div class="btn-group">
+      <a href="#profils" class="btn btn-primary"><i class="fas fa-address-card"></i> Découvrir mes profils</a>
+      <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Me contacter</a>
+    </div>
+  </div>
+  <div class="hero-right fade-in" id="heroProfile">
+    <div class="img-wrap">
+      <Image src={photo} alt="Portrait de David Meilleur" width={600} height={600} loading="eager" fetchpriority="high" />
+    </div>
+  </div>
+</section>

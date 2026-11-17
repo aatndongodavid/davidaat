@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import { projects, categories } from '../data/projects';
+---
+<section id="projets">
+  <div class="fade-in">
+    <h2 class="section-title"><span>Projets</span> récents</h2>
+    <p class="section-sub">Des solutions concrètes, organisées par domaine.</p>
+  </div>
+
+  <div class="project-filters fade-in" role="group" aria-label="Filtrer les projets">
+    {categories.map((c, i) => (
+      <button class:list={['filter-btn', { active: i === 0 }]} data-filter={c.id} aria-pressed={i === 0 ? 'true' : 'false'}>
+        {c.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="projects-grid" id="projectsGrid">
+    {projects.map((p) => (
+      <article class="project-card fade-in" data-category={p.category}>
+        <div class="project-thumb">
+          <Image src={p.thumb} alt={`Aperçu du projet ${p.title}`} width={600} height={360} />
+        </div>
+        <div class="project-icon"><i class={p.icon}></i></div>
+        <h3 class="project-title">{p.title}</h3>
+        <div class="project-tags">{p.tags.map((t) => <span class="project-tag">{t}</span>)}</div>
+        <p class="project-desc">{p.desc}</p>
+        <div class="project-links">
+          {p.repo && (
+            <a href={`https://github.com/aatndongodavid/${p.repo}`} target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i>GitHub</a>
+          )}
+          {p.live && (
+            <a href={p.live} target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i>Live</a>
+          )}
+        </div>
+        <div class="detail-row">
+          <button class="detail-btn" type="button">Détails</button>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<dialog class="project-dialog" id="projectDialog" aria-labelledby="projectDialogTitle">
+  <button class="modal-close" type="button" aria-label="Fermer"><i class="fas fa-times"></i></button>
+  <div class="project-modal-header">
+    <div class="project-modal-thumb" data-slot="thumb"></div>
+    <div class="project-modal-body">
+      <h3 id="projectDialogTitle" data-slot="title"></h3>
+      <div class="project-tags" data-slot="tags"></div>
+      <p data-slot="desc"></p>
+      <div class="project-links" data-slot="links"></div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .detail-row { margin-top: 10px; display: flex; gap: 10px; }
+  .project-card[hidden] { display: none; }
+  .project-dialog {
+    margin: auto;
+    background: #8A3A07;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 24px;
+    max-width: 900px;
+    width: 95%;
+    max-height: 85vh;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .project-dialog::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); }
+  .project-dialog h3 { color: var(--primary-light); font-family: 'Syne', sans-serif; margin-bottom: 8px; }
+  .project-dialog p { color: var(--muted); }
+</style>
+
+<script>
+  // Filtres
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.project-card');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      buttons.forEach((b) => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      cards.forEach((card) => {
+        card.hidden = filter !== 'all' && card.dataset.category !== filter;
+      });
+    });
+  });
+
+  // Modale « Détails » (élément <dialog> natif : Échap et focus gérés par le navigateur)
+  const dialog = document.getElementById('projectDialog') as HTMLDialogElement;
+  const slot = (name: string) => dialog.querySelector<HTMLElement>(`[data-slot="${name}"]`)!;
+  cards.forEach((card) => {
+    card.querySelector('.detail-btn')?.addEventListener('click', () => {
+      slot('thumb').replaceChildren(card.querySelector('img')!.cloneNode());
+      slot('title').textContent = card.querySelector('.project-title')!.textContent;
+      slot('desc').textContent = card.querySelector('.project-desc')!.textContent;
+      slot('tags').innerHTML = card.querySelector('.project-tags')!.innerHTML;
+      slot('links').innerHTML = card.querySelector('.project-links')!.innerHTML;
+      dialog.showModal();
+    });
+  });
+  dialog.querySelector('.modal-close')!.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+</script>

@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Parcours from '../components/Parcours.astro';
+import Profils from '../components/Profils.astro';
+import Projets from '../components/Projets.astro';
+import CV from '../components/CV.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base>
+  <div class="floating-elements" id="floatingElements" aria-hidden="true"></div>
+  <Nav />
+  <main>
+    <Hero />
+    <Parcours />
+    <Profils />
+    <Projets />
+    <CV />
+    <Contact />
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Apparition au défilement
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+  if (!reduceMotion) {
+    // Formes décoratives flottantes
+    const container = document.getElementById('floatingElements')!;
+    for (let i = 0; i < 16; i++) {
+      const shape = document.createElement('div');
+      shape.className = 'float-shape';
+      const size = Math.random() * 40 + 10;
+      Object.assign(shape.style, {
+        width: `${size}px`, height: `${size}px`,
+        left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`,
+        animationDuration: `${Math.random() * 8 + 8}s`,
+        animationDelay: `${Math.random() * 6}s`,
+      });
+      container.appendChild(shape);
+    }
+
+    // Parallaxe à la souris (recalculée seulement quand la souris bouge)
+    const shapes = container.querySelectorAll<HTMLElement>('.float-shape');
+    const hero = document.getElementById('heroProfile');
+    let frame = 0;
+    window.addEventListener('mousemove', (e) => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const x = e.clientX / window.innerWidth - 0.5;
+        const y = e.clientY / window.innerHeight - 0.5;
+        shapes.forEach((s, i) => { s.style.translate = `${x * (8 + i * 0.5)}px ${y * (8 + i * 0.5)}px`; });
+        if (hero) hero.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+      });
+    });
+  }
+</script>

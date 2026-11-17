@@ -30,17 +30,36 @@ Ce portfolio a été développé pour mettre en avant mes projets concrets et co
 ##  Stack Technique
 
 **Frontend**
-- HTML5 sémantique
-- CSS3 avec variables CSS et Flexbox/Grid
-- JavaScript vanilla pour les interactions
-- Font Awesome pour les icônes
-- Police Inter pour une excellente lisibilité
+- [Astro](https://astro.build) (site statique, zéro JavaScript superflu)
+- CSS avec variables (palette Gemula), Flexbox/Grid
+- TypeScript léger pour les interactions (filtres, modale, animations)
+- Images optimisées automatiquement en WebP par `astro:assets`
+- Font Awesome pour les icônes, polices Syne & DM Sans
 
 **Déploiement & Outils**
-- Hébergement : GitHub Pages
-- Versionning : Git & GitHub
-- Éditeur : Visual Studio Code
-- Validation : W3C Standards
+- Hébergement : GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`)
+- Domaine : `davidportfolio.gemula.org` (fichier `public/CNAME`)
+- Sitemap généré automatiquement
+
+##  Développement local
+
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # génère le site dans dist/
+```
+
+##  Structure
+
+```
+src/
+  data/projects.ts     ← la liste des projets (ajouter un projet ici)
+  data/profile.ts      ← expériences, formations, profils, réseaux sociaux
+  components/          ← une section du site par fichier
+  assets/images/       ← captures des projets et photo de profil
+  styles/global.css    ← styles globaux
+public/documents/      ← CV en PDF
+```
 
 ##  Projets Présentés
 

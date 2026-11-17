@@ -1,0 +1,22 @@
+---
+import { socials } from '../data/profile';
+---
+<section id="contact" class="centered">
+  <div class="fade-in">
+    <h2 class="section-title"><span>Contact</span></h2>
+    <p class="section-sub">Discutons de vos projets ou collaborations.</p>
+  </div>
+  <div class="icon-grid fade-in">
+    {socials.map((s) => (
+      <a
+        href={s.href}
+        class="icon-card"
+        style={`--icolor:${s.color};`}
+        aria-label={s.label}
+        {...(s.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        <i class={s.icon}></i><span>{s.label}</span>
+      </a>
+    ))}
+  </div>
+</section>

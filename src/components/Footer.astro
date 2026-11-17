@@ -1,0 +1,12 @@
+---
+const year = new Date().getFullYear();
+---
+<footer>
+  <p>© {year} <span class="hl">David Meilleur</span> - Tous droits réservés</p>
+  <p class="small"><a href="https://gemula.org" class="hl">Design Gemula</a> · Innovation continue · Propulsé par Astro</p>
+</footer>
+
+<style>
+  .hl { color: var(--primary-light); text-decoration: none; }
+  .small { margin-top: 6px; font-size: 0.8rem; }
+</style>
