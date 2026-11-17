@@ -2,16 +2,16 @@
 
 <div align="center">
 
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-success)
+![Vercel](https://img.shields.io/badge/Vercel-Deployed-success)
 ![Status](https://img.shields.io/badge/Status-Online-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Last Updated](https://img.shields.io/badge/January_2026-Updated-blue)
 
 **Portfolio professionnel présentant mes compétences en Data Science, Machine Learning et Intelligence Artificielle**
 
-[ Site en ligne](https://davidaatportfolio.netlify.app/) • 
+[ Site en ligne](https://davidaat.vercel.app/) • 
 [ Contact](mailto:meilleurd2001@gmail.com) • 
-[ LinkedIn](https://www.linkedin.com/in/david-meilleur-aat-ndongo-bb43b0314?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
+[ LinkedIn](https://www.linkedin.com/in/david-meilleur-aat-ndongo)
 
 </div>
 
@@ -21,9 +21,9 @@ Ce portfolio a été développé pour mettre en avant mes projets concrets et co
 
 ##  Caractéristiques Principales
 
-- **Design élégant** : Interface dark mode avec accents bleus et animations subtiles
+- **Design élégant** : Charte de Gemula : fond sombre, accent orange, animations discrètes
 - **Responsive complet** : Optimisé pour mobile, tablette et desktop
-- **Performances optimisées** : Chargement rapide, code vanilla sans dépendances lourdes
+- **Performances optimisées** : Site statique Astro, images WebP, polices et icônes hébergées localement
 - **Contenu structuré** : Présentation claire des projets et compétences
 - **Accès direct** : Liens vers dépôts GitHub et démos en ligne
 
@@ -37,8 +37,8 @@ Ce portfolio a été développé pour mettre en avant mes projets concrets et co
 - Images optimisées automatiquement en WebP par `astro:assets`
 
 **Déploiement & Outils**
-- Hébergement : GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`)
-- Domaine : `davidportfolio.gemula.org` (fichier `public/CNAME`)
+- Hébergement : Vercel, à l'adresse https://davidaat.vercel.app/ (configuration dans `vercel.json`)
+- Chaque push sur `main` redéploie le site ; chaque branche obtient un aperçu Vercel
 - Sitemap généré automatiquement
 
 ##  Développement local
@@ -60,77 +60,24 @@ src/
 public/documents/      ← CV en PDF (un seul fichier)
 ```
 
-##  Projets Présentés
+##  Contenu du site
 
-###  Tatiana IA
-Application desktop intégrant une IA pour effectuer des calculs chimiques simples avec traitement du langage naturel. Permet le calcul des quantités de matière, masses moléculaires et interprétation de requêtes naturelles.
+Tout le contenu est repris du CV et centralisé dans `src/data/cv.ts` : parcours, Gemula, 12 projets techniques, compétences, formations, certifications, engagement.
 
-**Technologies** : Python, NLP, Interface Graphique
+##  Déploiement
 
-###  Student Success Predictor
-Application web de prédiction de réussite académique analysant les habitudes d'étude des étudiants. Interface interactive avec visualisations et dashboard administrateur.
+Le site est hébergé sur **Vercel** : https://davidaat.vercel.app/
 
-**Technologies** : Machine Learning, Flask, Scikit-learn, Data Visualization
-
-###  Système de Facturation EYOUM'SHOP
-Solution complète d'automatisation de facturation avec gestion de stocks, suivi des ventes et tableaux de bord financiers. Comprend trois modules intégrés.
-
-**Technologies** : Excel VBA, Automatisation, Business Intelligence
-
-###  Formation Professionnelle Infographie
-Conception et mise en œuvre d'un programme de formation professionnelle en infographie avec certification. Développement du curriculum et supports pédagogiques.
-
-**Technologies** : Gestion de Projet, Business Plan, Design Pédagogique
-
-##  Structure du Projet
-
-```
-portfolio/
-├── index.html              # Page principale
-├── images/pp.jpg        # Photo professionnelle
-├── documents/cv-david-meilleur.pdf   # CV téléchargeable
-└── README.md              # Documentation
-```
-
-##  Installation & Utilisation
-
-### Déploiement Local
-```bash
-# Cloner le repository
-git clone https://github.com/monsieurMechant200/davidaat.git
-
-# Ouvrir le fichier principal
-open index.html
-# ou
-start index.html
-```
-
-### Déploiement en Production
-Le site est automatiquement déployé via **GitHub Pages** à l'adresse :
-```
-https://monsieurMechant200.github.io
-```
-
-##  Compétences Développées
-
-### Techniques
-- **Data Science** : Python, Pandas, NumPy, Scikit-learn, Matplotlib
-- **Développement Web** : HTML5, CSS3, JavaScript, Responsive Design
-- **Base de données** : SQL, modélisation de données
-- **Outils** : Git, GitHub, Power BI, Excel avancé
-
-### Professionnelles
-- Gestion de projet technique
-- Communication claire de concepts complexes
-- Résolution de problèmes analytique
-- Collaboration en équipe
+- `vercel.json` force la configuration Astro (sortie `dist/`) et redirige les anciens liens de CV vers le nouveau.
+- Un push sur `main` met le site en ligne ; les autres branches donnent un lien d'aperçu.
 
 ##  Contact & Réseaux
 
 - **Email** : [meilleurd2001@gmail.com](mailto:meilleurd2001@gmail.com)
-- **LinkedIn** : [David Aat](https://www.linkedin.com/in/david-meilleur-aat-ndongo-bb43b0314?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
-- **GitHub** : [@monsieurMechant200](https://github.com/monsieurMechant200)
-- **Portfolio** : [Mon portfolio](https://davidaatportfolio.netlify.app/)
+- **LinkedIn** : [david-meilleur-aat-ndongo](https://www.linkedin.com/in/david-meilleur-aat-ndongo)
+- **GitHub** : [@aatndongodavid](https://github.com/aatndongodavid)
+- **Portfolio** : [davidaat.vercel.app](https://davidaat.vercel.app/)
+- **Gemula** : [gemula.org](https://gemula.org)
 
 ## Licence
 

@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://davidportfolio.gemula.org',
+  site: 'https://davidaat.vercel.app',
   integrations: [sitemap()],
   build: { inlineStylesheets: 'auto' }
 });

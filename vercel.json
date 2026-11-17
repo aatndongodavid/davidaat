@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/documents/CV_Data_Scientist_AAT_NDONGO.pdf", "destination": "/documents/CV_AAT_NDONGO_David_Meilleur.pdf", "permanent": true },
+    { "source": "/documents/CV_AI_Engineer_AAT_NDONGO.pdf", "destination": "/documents/CV_AAT_NDONGO_David_Meilleur.pdf", "permanent": true },
+    { "source": "/documents/CV_Software_IT_Engineer_AAT_NDONGO.pdf", "destination": "/documents/CV_AAT_NDONGO_David_Meilleur.pdf", "permanent": true },
+    { "source": "/documents/cv%20aat%20ndongo%20david%20meilleur.pdf", "destination": "/documents/CV_AAT_NDONGO_David_Meilleur.pdf", "permanent": true }
+  ]
+}
