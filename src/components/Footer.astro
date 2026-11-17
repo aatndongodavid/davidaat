@@ -1,12 +1,16 @@
 ---
+import { identity } from '../data/cv';
 const year = new Date().getFullYear();
 ---
-<footer>
-  <p>© {year} <span class="hl">David Meilleur</span> - Tous droits réservés</p>
-  <p class="small"><a href="https://gemula.org" class="hl">Design Gemula</a> · Innovation continue · Propulsé par Astro</p>
+<footer class="footer">
+  <div class="container inner">
+    <p>© {year} {identity.fullName}</p>
+    <p>Fondateur de <a href={identity.gemula} class="accent">Gemula</a> · Site construit avec Astro</p>
+  </div>
 </footer>
 
 <style>
-  .hl { color: var(--primary-light); text-decoration: none; }
-  .small { margin-top: 6px; font-size: 0.8rem; }
+  .footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--subtle); font-size: .875rem; }
+  .inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a:hover { text-decoration: underline; text-underline-offset: 4px; }
 </style>

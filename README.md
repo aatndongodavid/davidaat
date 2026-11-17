@@ -31,10 +31,10 @@ Ce portfolio a été développé pour mettre en avant mes projets concrets et co
 
 **Frontend**
 - [Astro](https://astro.build) (site statique, zéro JavaScript superflu)
-- CSS avec variables (palette Gemula), Flexbox/Grid
-- TypeScript léger pour les interactions (filtres, modale, animations)
+- Charte graphique de Gemula (fond sombre, accent orange #FF5000, police Inter hébergée sur le site)
+- Icônes SVG intégrées (aucune dépendance externe)
+- TypeScript léger pour les interactions (menu mobile, filtres, apparitions)
 - Images optimisées automatiquement en WebP par `astro:assets`
-- Font Awesome pour les icônes, polices Syne & DM Sans
 
 **Déploiement & Outils**
 - Hébergement : GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`)
@@ -53,12 +53,11 @@ npm run build    # génère le site dans dist/
 
 ```
 src/
-  data/projects.ts     ← la liste des projets (ajouter un projet ici)
-  data/profile.ts      ← expériences, formations, profils, réseaux sociaux
+  data/cv.ts           ← TOUT le contenu (repris du CV) : modifier ici pour mettre le site à jour
   components/          ← une section du site par fichier
-  assets/images/       ← captures des projets et photo de profil
+  assets/              ← photo de profil, captures des projets, logo Gemula
   styles/global.css    ← styles globaux
-public/documents/      ← CV en PDF
+public/documents/      ← CV en PDF (un seul fichier)
 ```
 
 ##  Projets Présentés
